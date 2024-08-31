@@ -1,10 +1,12 @@
 Local Development
 ```
 cp .env.example .env
-docker compose up
+docker compose up -d
 ```
 
-Unit Tests
+Production Build and Run
 ```
-docker compose exec -it web-app pytest --cov=models
+docker build -t base -f Dockerfile.base .
+docker build -t production --build-arg BASE_IMAGE=base .
+docker run --rm -it production
 ```
